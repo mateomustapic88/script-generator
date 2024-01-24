@@ -7,6 +7,28 @@ const ScriptGeneration: React.FC = () => {
   const { script, setObjectToEvaluate, setScript, setResult } =
     useContext(ScriptContext);
 
+  const getRandomObject = () => {
+    return {
+      name: getRandomString(),
+      age: getRandomNumber(1, 150),
+      // Add other properties as needed
+    };
+  };
+
+  const getRandomString = (length = 8) => {
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      result += charset.charAt(randomIndex);
+    }
+    return result;
+  };
+
+  const getRandomNumber = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
   const handleScriptChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
@@ -14,17 +36,14 @@ const ScriptGeneration: React.FC = () => {
   };
 
   const handleTestScript = () => {
-    // Test object
-    const testObject = {
-      name: "Buddha",
-      age: 150,
-    };
+    // Generate a random test object
+    const testObject = getRandomObject();
 
     // Set the test object
     setObjectToEvaluate(testObject);
 
     // Test script
-    const testScript = '(object.name === "Buddha" && object.age >= 100)';
+    const testScript = `(object.name === "${testObject.name}" && object.age === ${testObject.age})`;
 
     // Set the script
     setScript(testScript);
@@ -42,7 +61,7 @@ const ScriptGeneration: React.FC = () => {
   return (
     <div className='script-generation-container'>
       <h2>Script Generation</h2>
-      <button onClick={handleTestScript}>Use Test Script</button>
+      <button onClick={handleTestScript}>Generate test script</button>
       <textarea
         value={script}
         onChange={handleScriptChange}

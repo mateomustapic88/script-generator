@@ -4,7 +4,9 @@ import { ScriptContext } from "../context/ScriptContext";
 import "./ScriptExecution.scss";
 
 const ScriptExecution: React.FC = () => {
-  const { script, setObjectToEvaluate, setResult } = useContext(ScriptContext);
+  const { script, objectToEvaluate, setResult } = useContext(ScriptContext);
+
+  console.log(objectToEvaluate);
 
   const handleExecuteScript = () => {
     // Execute the script and update the result
