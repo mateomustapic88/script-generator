@@ -1,10 +1,13 @@
+// src/components/ScriptExecution.tsx
 import React, { useContext } from "react";
 import { ScriptContext } from "../context/ScriptContext";
+import "./ScriptExecution.scss";
 
 const ScriptExecution: React.FC = () => {
-  const { script, setResult } = useContext(ScriptContext);
+  const { script, setObjectToEvaluate, setResult } = useContext(ScriptContext);
 
   const handleExecuteScript = () => {
+    // Execute the script and update the result
     try {
       const result = eval(script) as boolean;
       setResult(result);
@@ -15,7 +18,7 @@ const ScriptExecution: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='script-execution-container'>
       <h2>Script Execution</h2>
       <button onClick={handleExecuteScript}>Execute Script</button>
     </div>

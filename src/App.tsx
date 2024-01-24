@@ -1,9 +1,9 @@
-// src/App.tsx
 import React from "react";
 import ScriptGeneration from "./components/ScriptGeneration";
 import ScriptExecution from "./components/ScriptExecution";
 import ResultDisplay from "./components/ResultDisplay";
 import { ScriptProvider } from "./context/ScriptContext";
+import "./App.scss";
 
 const App: React.FC = () => {
   return (

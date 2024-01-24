@@ -1,22 +1,22 @@
+// src/components/ResultDisplay.tsx
 import React, { useContext } from "react";
 import { ScriptContext } from "../context/ScriptContext";
+import "./ResultDisplay.scss";
 
 const ResultDisplay: React.FC = () => {
   const { result } = useContext(ScriptContext);
 
   return (
-    <div>
+    <div className='result-display-container'>
       <h2>Result Display</h2>
-      {result !== null ? (
-        <p>
-          Result:
-          {result
+      <p>
+        Result:{" "}
+        {result !== null
+          ? result
             ? "Object meets conditions"
-            : "Object does not meet conditions"}
-        </p>
-      ) : (
-        <p>No result to display</p>
-      )}
+            : "Object does not meet conditions"
+          : "No result to display"}
+      </p>
     </div>
   );
 };

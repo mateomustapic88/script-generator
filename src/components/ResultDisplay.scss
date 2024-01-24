@@ -1,0 +1,16 @@
+$white: #ffffff;
+$main-color: #b60e1f;
+
+.result-display-container {
+  margin: 20px auto;
+  max-width: 80%;
+  padding: 20px;
+  background-color: $white;
+  border: 1px solid $main-color;
+  border-radius: 8px;
+  text-align: center;
+
+  p {
+    font-size: 18px;
+  }
+}

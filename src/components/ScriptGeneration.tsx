@@ -1,5 +1,7 @@
+// src/components/ScriptGeneration.tsx
 import React, { useContext } from "react";
 import { ScriptContext } from "../context/ScriptContext";
+import "./ScriptGeneration.scss";
 
 const ScriptGeneration: React.FC = () => {
   const { script, setObjectToEvaluate, setScript, setResult } =
@@ -16,7 +18,6 @@ const ScriptGeneration: React.FC = () => {
     const testObject = {
       name: "Buddha",
       age: 150,
-      // Add other properties as needed
     };
 
     // Set the test object
@@ -39,7 +40,7 @@ const ScriptGeneration: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='script-generation-container'>
       <h2>Script Generation</h2>
       <button onClick={handleTestScript}>Use Test Script</button>
       <textarea

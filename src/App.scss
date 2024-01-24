@@ -1,0 +1,14 @@
+$white: #ffffff;
+$main-color: #b60e1f;
+
+.app-container {
+  background-color: $white;
+  color: $main-color;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.app-title {
+  color: $main-color;
+}
