@@ -19,7 +19,7 @@ interface ScriptContextProps {
 export const ScriptContext = createContext<ScriptContextProps>({
   script: "",
   setScript: () => {},
-  objectToEvaluate: { name: "", age: 0 },
+  objectToEvaluate: { name: "", age: 0, role: "" },
   setObjectToEvaluate: () => {},
   result: null,
   setResult: () => {},
@@ -34,6 +34,7 @@ export const ScriptProvider: React.FC<ScriptProviderProps> = ({ children }) => {
   const [objectToEvaluate, setObjectToEvaluate] = useState<ScriptObject>({
     name: "",
     age: 0,
+    role: "",
   });
   const [result, setResult] = useState<boolean | null>(null);
 

@@ -9,7 +9,6 @@ const ScriptExecution: React.FC = () => {
   console.log(objectToEvaluate);
 
   const handleExecuteScript = () => {
-    // Execute the script and update the result
     try {
       const result = eval(script) as boolean;
       setResult(result);
