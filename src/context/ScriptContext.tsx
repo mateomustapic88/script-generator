@@ -4,6 +4,7 @@ import React, {
   Dispatch,
   SetStateAction,
   ReactNode,
+  useEffect,
 } from "react";
 import { ScriptObject } from "../types/types";
 
@@ -12,7 +13,7 @@ interface ScriptContextProps {
   setScript: Dispatch<SetStateAction<string>>;
   objectToEvaluate: ScriptObject;
   setObjectToEvaluate: Dispatch<SetStateAction<ScriptObject>>;
-  result: boolean | null;
+  result: boolean | null; // Adjusted the type to boolean
   setResult: Dispatch<SetStateAction<boolean | null>>;
 }
 
@@ -37,6 +38,14 @@ export const ScriptProvider: React.FC<ScriptProviderProps> = ({ children }) => {
     role: "",
   });
   const [result, setResult] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setResult(
+      objectToEvaluate.name === "Budha" ||
+        objectToEvaluate.age === 40 ||
+        objectToEvaluate.role === "student"
+    );
+  }, [objectToEvaluate]);
 
   return (
     <ScriptContext.Provider

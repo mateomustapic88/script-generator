@@ -1,5 +1,4 @@
-// src/components/ScriptGeneration.tsx
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ScriptContext } from "../context/ScriptContext";
 import "./ScriptGeneration.scss";
 import { ScriptObject } from "../types/types";
@@ -12,6 +11,14 @@ const ScriptGeneration: React.FC = () => {
     setScript,
     setResult,
   } = useContext(ScriptContext);
+
+  const [generatedScriptResult, setGeneratedScriptResult] =
+    useState<ScriptObject | null>(null);
+
+  useEffect(() => {
+    // Update the generated script result when objectToEvaluate changes
+    setGeneratedScriptResult(objectToEvaluate);
+  }, [objectToEvaluate]);
 
   const getRandomObject = () => {
     return {
@@ -68,24 +75,22 @@ const ScriptGeneration: React.FC = () => {
 
     // Test script
     const testScript = function (objectToEvaluate: ScriptObject) {
-      if (
+      return (
         objectToEvaluate.name === "Budha" ||
         objectToEvaluate.age === 40 ||
         objectToEvaluate.role === "student"
-      ) {
-        return objectToEvaluate;
-      }
+      );
     };
 
     // Set the script
-    setScript(JSON.stringify(testScript));
+    setScript(JSON.stringify(testScript(objectToEvaluate)));
 
     // Execute the script and update the result
     try {
       const result = testScript(objectToEvaluate);
-      if (result) {
-        setResult(true);
-      }
+      setResult(result);
+
+      console.log(result, "result");
     } catch (error) {
       console.error("Error executing script:", error);
       setResult(null);
@@ -97,7 +102,11 @@ const ScriptGeneration: React.FC = () => {
       <h2>Script Generation</h2>
       <button onClick={handleTestScript}>Generate test script</button>
       <textarea
-        value={script}
+        value={`Generated Script Result\nName: ${
+          generatedScriptResult?.name || ""
+        }\nAge: ${generatedScriptResult?.age || ""}\nRole: ${
+          generatedScriptResult?.role || ""
+        }`}
         onChange={handleScriptChange}
         placeholder='Enter script here'
         rows={4}

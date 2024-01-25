@@ -4,7 +4,9 @@ import { ScriptContext } from "../context/ScriptContext";
 import "./ResultDisplay.scss";
 
 const ResultDisplay: React.FC = () => {
-  const { result } = useContext(ScriptContext);
+  const { result, script } = useContext(ScriptContext);
+
+  console.log(script);
 
   return (
     <div className='result-display-container'>
