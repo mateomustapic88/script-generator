@@ -14,6 +14,7 @@ const ScriptGeneration: React.FC = () => {
 
   const [generatedScriptResult, setGeneratedScriptResult] =
     useState<ScriptObject | null>(null);
+  const [savedResults, setSavedResults] = useState<ScriptObject[]>([]);
 
   useEffect(() => {
     // Update the generated script result when objectToEvaluate changes
@@ -97,6 +98,22 @@ const ScriptGeneration: React.FC = () => {
     }
   };
 
+  const handleSaveScript = () => {
+    try {
+      // Save the current generatedScriptResult to local storage
+      if (generatedScriptResult) {
+        const updatedResults = [...savedResults, generatedScriptResult];
+        setSavedResults(updatedResults);
+        localStorage.setItem("savedResults", JSON.stringify(updatedResults));
+        alert("Script result saved!");
+      } else {
+        console.log("No script result to save.");
+      }
+    } catch (error) {
+      console.error("Error saving script result:", error);
+    }
+  };
+
   return (
     <div className='script-generation-container'>
       <h2>Script Generation</h2>
@@ -112,6 +129,8 @@ const ScriptGeneration: React.FC = () => {
         rows={4}
         cols={50}
       />
+
+      <button onClick={handleSaveScript}>Save Generated Script</button>
     </div>
   );
 };
